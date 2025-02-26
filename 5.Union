@@ -1,0 +1,13 @@
+: Вставьте ваш код ниже
+ --union and union all
+select StudentName, StudentLastName from Students3
+union all
+select StudentName, StudentLastName from Students4
+
+begin tran alter_students3
+insert into Students3 ([StudentName], [StudentLastName]) values ('Sabina', 'Giyagi');
+insert into Students3([StudentName], [StudentLastName]) values ('Moldir', 'Daribay');
+insert into Students3([StudentName], [StudentLastName]) values ('Alisher', 'Shormakov');
+insert into Students3([StudentName], [StudentLastName]) values ('Adinay', 'Bekpayeva');
+
+rollback tran alter_students3
