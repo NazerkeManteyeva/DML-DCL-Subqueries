@@ -1,0 +1,27 @@
+1: Вставьте ваш код ниже
+Use MusicDB
+
+--счета с суммой выше среднего
+select *from Invoice
+where Total > (select avg(Total) from Invoice)
+
+--клиенты которые не покупают
+select *from Customer
+where CustomerId not in (select distinct ustomerId from Invoice)
+2: Выполните самостоятельное задание!
+Выведите из таблицы Track - TrackId, название песни, композитор, милисекунды по тем песням, удовлетворяющие условиям:
+
+1) где указан композитор
+
+2) и продолжительность (милисекунды) больше чем средняя продолжительность всех песен.
+
+SELECT 
+    TrackId, 
+    Name AS SongName, 
+    Composer, 
+    Milliseconds 
+FROM 
+    Track
+WHERE 
+    Composer IS NOT NULL
+    AND Milliseconds > (SELECT AVG(Milliseconds) FROM Track)
