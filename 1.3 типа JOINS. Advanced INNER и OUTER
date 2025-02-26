@@ -1,0 +1,44 @@
+00:00   Повторение теории по JOINS
+01:47   Все типы JOINS введение (INNER, OUTER, CROSS)
+02:47   Advanced JOINS схема
+03:50   Advanced JOINS практика
+
+1: Вставьте ваш код, а так же решите задачи ниже:
+use DataBoomDB
+select *from emails
+select *from Students
+
+--only non matching rows from left table
+select *from emails A
+left join Students B
+on A.StudentId = B.StudentID
+where B.StudentID is null
+
+--удалим пару эмайлов
+begin tran delete_emails
+delete from emails
+where StudentId < 3
+
+--only non matchin rows from both tables
+select *from emails A
+full join Students B
+on A.StudentId = B.StudentId
+where A.StudentId is null or B.StudentId is null
+
+--воскреси удаленные имэйлы
+rollback tran delete_emails
+2: 1. Вам даны таблицы Genre и Track. Найдите название того жанра, к которому не относится ни одна песня(трэк)
+SELECT g.Name AS GenreName
+FROM Genre g
+left JOIN Track t ON g.GenreId = t.GenreId
+WHERE t.TrackId is not null
+3: Вам даны таблицы Playlist и PlaylistTrack. Найдите название тех плейлистов, которые не содержат в себе никаких песен (трэков).
+SELECT p.Name AS PlaylistName
+FROM Playlist p
+LEFT JOIN PlaylistTrack pt ON p.PlaylistId = pt.PlaylistId
+WHERE pt.PlaylistId IS NULL
+4: Вам даны таблицы Artist и Album. Найдите имена и идентификаторы исполнителей, у которых нет альбомов.
+SELECT a.ArtistId, a.Name AS ArtistName
+FROM Artist a
+LEFT JOIN Album al ON a.ArtistId = al.ArtistId
+WHERE al.ArtistId IS NULL
