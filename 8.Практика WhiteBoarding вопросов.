@@ -1,0 +1,7 @@
+1: 1. Напишите запрос, который вернет вам максимальную зарплату
+SELECT MAX(salary) AS max_salary
+FROM Employees
+2: 2. Напишите запрос, который вернет вам вторую по величине зарплату
+SELECT MAX(Salary) AS вторая_по_величине_зарплата
+FROM Employees
+WHERE Salary < (SELECT MAX(Salary) FROM Employees)
