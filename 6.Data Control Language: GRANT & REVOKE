@@ -1,0 +1,59 @@
+Use [master];
+Go
+
+--server a sql server login
+CREATE LOGIN [bob] WITH PASSWORD = 'Pa$$word';
+Go
+Create USER [bob] FOR LOGIN [bob]
+Go
+
+Use [TestDB]
+Go
+Create USER [bob] FOR LOGIN [bob]
+Go
+/********************************
+   Create Tables & Constraints
+*********************************/
+
+CREATE TABLE [Order] (
+    OrderId INT NOT NULL PRIMARY KEY,
+    OrderDate DATETIME NOT NULL DEFAULT GETDATE(),
+    Notes NVARCHAR(255) NULL
+);
+
+CREATE TABLE [Product] (
+    ProductId INT NOT NULL PRIMARY KEY,
+    ProductName NVARCHAR(100) NOT NULL,
+    Price MONEY NOT NULL,
+    [Description] NVARCHAR(4000) NULL
+);
+
+CREATE TABLE [OrderDetail] (
+    OrderDetailId INT NOT NULL PRIMARY KEY,
+    OrderId INT NOT NULL FOREIGN KEY REFERENCES [Order](OrderId),
+    ProductId INT NOT NULL FOREIGN KEY REFERENCES [Product](ProductId),
+    Quantity SMALLINT NOT NULL
+);
+
+/********************************
+    INSERT statement
+
+    INSERT INTO [table] (columns)
+    VALUES (values)
+*********************************/
+
+INSERT INTO [dbo].[Product] ([ProductId] ,[ProductName] ,[Price] ,[Description]) VALUES (1, 'Thing-a-ma-bob', 39.99, NULL);
+INSERT INTO [dbo].[Product] ([ProductId] ,[ProductName] ,[Price] ,[Description]) VALUES (2, 'Doo-hickey', 59.99, NULL);
+GO
+
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Notes]) VALUES (1, '2015-12-01', 'Special order here!');
+INSERT [dbo].[Order] ([OrderId], [OrderDate]) VALUES (2, '2016-02-11');
+GO
+
+INSERT [dbo].[OrderDetail] ([OrderDetailId], [OrderId], [ProductId], [Quantity]) VALUES (1, 1, 1, 2);
+INSERT [dbo].[OrderDetail]  VALUES (2, 1, 2, 3);
+INSERT [dbo].[OrderDetail] VALUES (3, 2, 1, 10);
+GO
+
+Grant select, insert on [product]To bob;
+Grant select on [Order]To bob
