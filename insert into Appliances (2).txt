@@ -1,0 +1,9 @@
+insert into Appliances values ('Electric kettle',50,'LG');
+insert into Appliances values ('Мacuum cleaner',80,'Heaven');
+insert into Appliances values ('Refrigerator',200,'Samsung');
+insert into Appliances values ('Gas stove',230,'Bosh');
+insert into Appliances values ('TV',250,'Samsung');
+insert into Appliances values ('Microwave',70,'LG');
+insert into Appliances values ('Oven',190,'Hanza');
+insert into Appliances values ('Washing machine',240,'Indesit');
+insert into Appliances values ('Boiler',120,'Ariston');
