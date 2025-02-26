@@ -1,0 +1,26 @@
+1: Вставьте ваш код ниже
+--cross join
+Use DataBoomDB
+select *from emails
+select *from Students
+
+select StudentName, email
+from Students
+cross join emails
+2: Выполните самостоятельное задание!
+Создайте таблицу Equipment_memory  и заполните ее данными используя запросы в файлах:
+
+CREATE Table Equipment_memory.txt  (87 B)
+
+insert into Equipment_memory.txt  (304 B)
+
+
+Необходимо вывести список всевозможных вариаций товар+объем памяти, которые хранятся на складе. В результате нужно вывести id товаров, наименования товаров и объем памяти, используя таблицу Goods (загружали на уроке 4.3.) и таблицу Equipment_memory, в которой хранится список доступных к выбору объема памяти.
+SELECT 
+    Goods.GoodsId AS ProductId, 
+    Goods.Goods_Name AS ProductName, 
+    Equipment_memory.Memory AS MemorySize
+FROM 
+    Goods
+CROSS JOIN 
+    Equipment_memory
