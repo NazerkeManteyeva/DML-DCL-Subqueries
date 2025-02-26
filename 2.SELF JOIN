@@ -1,0 +1,24 @@
+1: Вставьте ваш код ниже
+--SELF JOIN
+USE MusicDB
+Select *from Employee
+
+Select A.EmployeeID, A.LastName, A.FirstName, A.Title, A.ReportsTo, B.FirstName, B.LastName, C.FirstName, C.LastName
+From Employee A
+Left join Employee B
+on A.ReportsTo = B.EmployeeId
+Left join Employee C
+on B.ReportsTo = C.EmployeeId
+2: Выполните самостоятельное задание!
+В таблице Goods имеется информация о товарах, которые есть в магазине. Она содержит информацию о наименовании товара, его ID, цене, и ID акссесуара, соответствующего этому товару 
+Используя файлы вы можете создать таблицу в базе данных TestDB, затем заполнить данными:
+
+CREATE Table Goods.txt  (112 B)
+
+insert_data.txt  (1.2 KB)
+
+
+Задание: Из таблицы Goods, необходимо вывести Id товара, наименование товара и наименование аксессуара, которое соответствует устройству .
+SELECT GoodsId, Goods_Name AS ProductName, accessory_id AS AccessoryName
+FROM Goods
+WHERE accessory_id IS NOT NULL
