@@ -1,0 +1,39 @@
+аймкоды:
+00:33  Server Level Security на практике
+
+00:33  Создание логина через Windows
+01:00  Создание логина через SQL
+01:29  SQL Authentication must be enabled (включение этого пункта)
+02:29  Создание логина через интерфес
+03:59  Присвоение роли пользователю через скрипт либо через интерфейс SQL
+05:55  Securables, его интерфейс в SQL
+07:28  Database Level Security и его интерфейс в SQL
+10:27  Создание пользователя скриптом на уровне Database Level Security в базе данных MusicDB
+10:57  Назначение прав на нового созданного пользователя JuniorDBA
+13:32  Назначение прав для JuniorDBA на backup MusicDB
+15:58  Object Level Security и его команды + практика
+
+1: Вставьте ваш код ниже
+--windows Authentication
+CREATE LOGIN[Server\Group1] FROM WINDOWS
+
+--SQL Authentication
+CREATE LOGIN [JuniorDBA] WITH PASSWORD = N'Pa$$w0rd'
+
+ALTER SERVER ROLE [dbcreator] ADD MEMBER [JuniorDBA]
+
+--Database Level Sequirity
+USE [MusicDB]
+CREATE USER [JuniorDBA] FOR LOGIN [JuniorDBA]
+
+--Object Level Security
+Use [ MusicDB]
+
+Grant INSERT ON [dbo].[Employee] TO [JuniorDBA]
+REVOKE INSERT ON [dbo].[Employee] FROM [JuniorDBA]
+Grant INSERT ON [dbo].[Album] TO [JuniorDBA]
+--Test
+EXECUTE AS USER = 'JuniorDBA'
+SELECT SUSER_NAME()
+SELECT *FROM Album
+REVERT
